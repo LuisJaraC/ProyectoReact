@@ -1,0 +1,22 @@
+.navbar{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 1rem 1rem 1rem 1rem ;
+    padding: auto;
+    background-color: rgb(106, 106, 204);
+    border-radius: 15px;
+}
+
+.accords{
+    margin: .5rem;
+    padding: 2rem;
+    background-color: rgb(21, 21, 194);
+    border-radius: 1rem;
+    color:lightblue
+}
+.accords:hover{
+    cursor:pointer;
+    background-color: lightblue;
+    color: black
+}

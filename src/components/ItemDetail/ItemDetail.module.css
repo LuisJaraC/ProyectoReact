@@ -1,0 +1,13 @@
+.cards{
+    text-align: center;
+    background-color: blanchedalmond;
+    margin: 1rem;
+    border-radius: 50px;
+}
+.title{
+    text-align: center;
+}
+.image{
+    max-width: 200px;
+    max-height: 400px;
+}
