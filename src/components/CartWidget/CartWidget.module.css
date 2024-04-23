@@ -1,9 +1,8 @@
-.carritoLogo{
-    background-color: rgb(106, 106, 204);
-}
+
 
 .imagenCarrito:hover{
     cursor: pointer;
-    background-color: lightblue;
+    background-color: rgb(157, 111, 41);
     color:black;
+    padding: 0.02rem;
 }

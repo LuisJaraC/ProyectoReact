@@ -1,22 +1,35 @@
+.logo{
+    border-radius: 15px;
+    border:rgb(157, 111, 41) solid;
+    padding: 20px;
+}
+
+.logo:hover{
+    cursor: pointer;
+    background-color: rgb(157, 111, 41);
+}
+
 .navbar{
     display: flex;
     justify-content: space-around;
     align-items: center;
     margin: 1rem 1rem 1rem 1rem ;
     padding: auto;
-    background-color: rgb(106, 106, 204);
+    background-color: blanchedalmond;
     border-radius: 15px;
 }
 
 .accords{
     margin: .5rem;
     padding: 2rem;
-    background-color: rgb(21, 21, 194);
+    background-color: rgb(239, 203, 150);
     border-radius: 1rem;
-    color:lightblue
+    color:black;
+    text-decoration: none;
+
 }
 .accords:hover{
     cursor:pointer;
-    background-color: lightblue;
+    background-color: rgb(157, 111, 41);
     color: black
 }
