@@ -3,21 +3,33 @@ import { useState, useEffect } from "react"
 import { getProducts, getProductsByCategory } from "../../asyncMock"
 import ItemList from "../ItemList/ItemList"
 import { useParams } from "react-router-dom"
+import { getDocs, collection, QuerySnapshot, query, where, orderBy} from "firebase/firestore"
+import { db } from "../../services/firebase/firebaseConfig"
 
 const ItemListContainer = ({ greeting }) => {
     const [products, setProducts]=useState([])
+
     const { categoryId} = useParams()
 
     useEffect(() => {
-        const asyncFunction = categoryId ? getProductsByCategory : getProducts
-    
-        asyncFunction(categoryId) //me retorna una promesa
-                .then(result => {//metodo then para manejar la promesa
-                    setProducts(result);
+
+        const productCollection = categoryId ? (
+            query(collection(db, 'products'), where('category', '==', categoryId))
+        ) : (
+            query(collection(db, 'products'), orderBy('category'))
+        )
+
+        getDocs(productCollection)
+            .then(querySnapshot => {
+                const productsAdapted = querySnapshot.docs.map(doc=>{
+                    const data = doc.data()
+                    return {id: doc.id, ...data}
                 })
-                .catch(error => {//siempre poner que hacer en caso de error
-                    showNotification("No se pudieron cargar los productos");
-                })
+                setProducts(productsAdapted)
+            })
+            .catch(error=>{
+                console.error(error)
+            })
     }, [categoryId])
     
   

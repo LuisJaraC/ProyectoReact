@@ -22,14 +22,16 @@ const InputCount = ({ onAdd, stock, initial=1}) => {
 
 const ButtonCount = ({ onAdd, stock, initial=1}) => {
     const [ count, setCount] = useState(initial)
-
+        
     const increment = ()=>{
         if(count < stock){
             setCount(count + 1)
         }
     }
     const decrement =()=>{
+        if(count > 0 )
             setCount(count - 1)
+
         }
     
 
@@ -37,9 +39,9 @@ const ButtonCount = ({ onAdd, stock, initial=1}) => {
     return(
         <div>
             <h3>{count}</h3>
-            <button onClick={increment}>-</button>
+            <button onClick={decrement}>-</button>
             <button onClick={() => onAdd(count)}>Agregar al carrito</button>
-            <button onClick={decrement}>+</button>
+            <button onClick={increment}>+</button>
         </div>
     )
 }
@@ -49,17 +51,17 @@ const ButtonCount = ({ onAdd, stock, initial=1}) => {
 const ItemDetail = ({ id, name, category, price, img, stock, description}) => {
     const [inputType, setInputType] = useState('button')
 
-    const [quantity, setQuantity] = useState(0)
+    // const [quantity, setQuantity] = useState(0)
 
     const ItemCount = inputType === 'input' ? InputCount : ButtonCount
 
-    const { addItem } = useContext(CartContext)
+    const { addItem, isInCart } = useContext(CartContext)
 
     const handleOnAdd = (quantity) => {
         const objProductToAdd = {
             id, name, price, quantity
         }
-        setQuantity(quantity)
+        // setQuantity(quantity)
 
         addItem(objProductToAdd)
     }
@@ -74,7 +76,7 @@ const ItemDetail = ({ id, name, category, price, img, stock, description}) => {
             <h4>Descripcion: {description}</h4>
             <footer>
                 {
-                    quantity === 0 ?(
+                    !isInCart(id) ?(
                         <ItemCount onAdd={handleOnAdd} stock={stock}/>
                     ) : (
                         <Link to='/cart'>Finalizar compra</Link>
